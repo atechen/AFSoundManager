@@ -52,8 +52,8 @@
     _feedbackTimer = [NSTimer scheduledTimerWithTimeInterval:updateRate block:^{
         
         if (block) {
-            
-            _queuePlayer.currentItem.timePlayed = (int)CMTimeGetSeconds(_queuePlayer.player.currentTime);
+            // chenEdit 删除获取当前时间后，强制类型转换为int类型
+            _queuePlayer.currentItem.timePlayed = CMTimeGetSeconds(_queuePlayer.player.currentTime);
             
             block(_queuePlayer.currentItem);
         }
@@ -73,7 +73,8 @@
             
             [_feedbackTimer pauseTimer];
             
-            [self playNextItem];
+            // chenEdit 注释，取消自动播放下一首
+//            [self playNextItem];
         }
     } repeats:YES];
 }

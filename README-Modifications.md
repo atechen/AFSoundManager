@@ -3,6 +3,9 @@
 #####AFSoundQueue.m文件
 1. -(void)playItem:(AFSoundItem *)item方法。
 修改后，保证音频暂停后重新播放时，timer重新开始
+2. -(void)listenFeedbackUpdatesWithBlock:(feedbackBlock)block andFinishedBlock:(itemFinishedBlock)finishedBlock
+修改后：获取到的当前播放时间是CGFloat类型的，提升精度；取消自动播放下一首音频
+
 
 #####AFSoundItem.m文件
 1. -(void)fetchMetadata方法。
@@ -19,3 +22,5 @@
 #####AFSoundPlayback.m文件
 1. -(void)setUpItem:(AFSoundItem *)item方法。
 修改后，初始化后不会立即播放
+2. -(void)listenFeedbackUpdatesWithBlock:(feedbackBlock)block andFinishedBlock:(finishedBlock)finishedBlock
+修改后，获取到的当前播放时间是CGFloat类型的，提升精度

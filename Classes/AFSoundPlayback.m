@@ -67,8 +67,8 @@ NSString * const AFSoundPlaybackFinishedNotification = @"kAFSoundPlaybackFinishe
     }
     
     _feedbackTimer = [NSTimer scheduledTimerWithTimeInterval:updateRate block:^{
-        
-        _currentItem.timePlayed = (int)CMTimeGetSeconds(_player.currentTime);
+        // chenEdit 删除获取当前时间后，强制类型转换为int类型
+        _currentItem.timePlayed = CMTimeGetSeconds(_player.currentTime);
         
         if (block) {
 
