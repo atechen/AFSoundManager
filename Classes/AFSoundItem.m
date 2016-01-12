@@ -54,33 +54,39 @@
     
     AVPlayerItem *playerItem = [[AVPlayerItem alloc] initWithURL:_URL];
     
-    NSArray *metadata = [playerItem.asset commonMetadata];
+    // chenEdit 添加
+    _duration = CMTimeGetSeconds(playerItem.asset.duration);
+    // chenEdit end
     
-    for (AVMetadataItem *metadataItem in metadata) {
-        
-        [metadataItem loadValuesAsynchronouslyForKeys:@[AVMetadataKeySpaceCommon] completionHandler:^{
-            
-            if ([metadataItem.commonKey isEqualToString:@"title"]) {
-                
-                _title = (NSString *)metadataItem.value;
-            } else if ([metadataItem.commonKey isEqualToString:@"albumName"]) {
-                
-                _album = (NSString *)metadataItem.value;
-            } else if ([metadataItem.commonKey isEqualToString:@"artist"]) {
-                
-                _artist = (NSString *)metadataItem.value;
-            } else if ([metadataItem.commonKey isEqualToString:@"artwork"]) {
-                
-                if ([metadataItem.keySpace isEqualToString:AVMetadataKeySpaceID3]) {
-                    
-                    _artwork = [UIImage imageWithData:[[metadataItem.value copyWithZone:nil] objectForKey:@"data"]];
-                } else if ([metadataItem.keySpace isEqualToString:AVMetadataKeySpaceiTunes]) {
-                    
-                    _artwork = [UIImage imageWithData:[metadataItem.value copyWithZone:nil]];
-                }
-            }
-        }];
-    }
+    // chenEdit 注释
+    //    NSArray *metadata = [playerItem.asset commonMetadata];
+    //
+    //    for (AVMetadataItem *metadataItem in metadata) {
+    //
+    //        [metadataItem loadValuesAsynchronouslyForKeys:@[AVMetadataKeySpaceCommon] completionHandler:^{
+    //
+    //            if ([metadataItem.commonKey isEqualToString:@"title"]) {
+    //
+    //                _title = (NSString *)metadataItem.value;
+    //            } else if ([metadataItem.commonKey isEqualToString:@"albumName"]) {
+    //
+    //                _album = (NSString *)metadataItem.value;
+    //            } else if ([metadataItem.commonKey isEqualToString:@"artist"]) {
+    //
+    //                _artist = (NSString *)metadataItem.value;
+    //            } else if ([metadataItem.commonKey isEqualToString:@"artwork"]) {
+    //
+    //                if ([metadataItem.keySpace isEqualToString:AVMetadataKeySpaceID3]) {
+    //
+    //                    _artwork = [UIImage imageWithData:[[metadataItem.value copyWithZone:nil] objectForKey:@"data"]];
+    //                } else if ([metadataItem.keySpace isEqualToString:AVMetadataKeySpaceiTunes]) {
+    //
+    //                    _artwork = [UIImage imageWithData:[metadataItem.value copyWithZone:nil]];
+    //                }
+    //            }
+    //        }];
+    //    }
+    // chenEdit end
 }
 
 -(void)setInfoFromItem:(AVPlayerItem *)item {

@@ -168,8 +168,9 @@
     if ([_items containsObject:item]) {
         
         if (_queuePlayer.status == AFSoundStatusNotStarted || _queuePlayer.status == AFSoundStatusPaused || _queuePlayer.status == AFSoundStatusFinished) {
-            
-//            [_feedbackTimer resumeTimer];
+            // chenEdit 取消注释
+            [_feedbackTimer resumeTimer];
+            // chenEdit end
         }
 
         _queuePlayer = [[AFSoundPlayback alloc] initWithItem:item];

@@ -28,8 +28,9 @@ typedef NS_ENUM(NSInteger, AFSoundItemType) {
 @property (nonatomic, readonly) NSURL *URL;
 @property (nonatomic, readonly) NSInteger type;
 
-@property (nonatomic) NSInteger duration;
-@property (nonatomic) NSInteger timePlayed;
+// chenEdit 数据类型由NSInteger改为CGFloat
+@property (nonatomic) CGFloat duration;
+@property (nonatomic) CGFloat timePlayed;
 
 -(void)setInfoFromItem:(AVPlayerItem *)item;
 

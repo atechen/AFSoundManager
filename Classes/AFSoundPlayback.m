@@ -42,14 +42,16 @@ NSString * const AFSoundPlaybackFinishedNotification = @"kAFSoundPlaybackFinishe
 -(void)setUpItem:(AFSoundItem *)item {
     
     _player = [[AVPlayer alloc] initWithURL:item.URL];
-    [_player play];
+    // chenEdit 注释
+//    [_player play];
     _player.actionAtItemEnd = AVPlayerActionAtItemEndPause;
-    
-    _status = AFSoundStatusPlaying;
+    // chenEdit 注释
+//    _status = AFSoundStatusPlaying;
 
     _currentItem = item;
-    _currentItem.duration = (int)CMTimeGetSeconds(_player.currentItem.asset.duration);
-        
+    //chenEdit 删除强制int类型转化
+    _currentItem.duration = CMTimeGetSeconds(_player.currentItem.asset.duration);
+    
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
@@ -142,9 +144,9 @@ NSString * const AFSoundPlaybackFinishedNotification = @"kAFSoundPlaybackFinishe
 }
 
 -(NSDictionary *)statusDictionary {
-    
-    return @{AFSoundStatusDuration: @((int)CMTimeGetSeconds(_player.currentItem.asset.duration)),
-             AFSoundStatusTimeElapsed: @((int)CMTimeGetSeconds(_player.currentItem.currentTime)),
+    // 删除Duration和Elapsed的强制int类型转化
+    return @{AFSoundStatusDuration: @(CMTimeGetSeconds(_player.currentItem.asset.duration)),
+             AFSoundStatusTimeElapsed: @(CMTimeGetSeconds(_player.currentItem.currentTime)),
              AFSoundPlaybackStatus: @(_status)};
 }
 

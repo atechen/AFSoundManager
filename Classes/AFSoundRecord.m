@@ -20,8 +20,19 @@
 -(id)initWithFilePath:(NSString *)filePath {
     
     if (self == [super init]) {
+        // chenEdit 添加
+        NSMutableDictionary *settings = [[NSMutableDictionary alloc] init];
+        [settings setValue :[NSNumber numberWithInt:kAudioFormatLinearPCM] forKey: AVFormatIDKey];
+        [settings setValue :[NSNumber numberWithFloat:11025.0] forKey: AVSampleRateKey];//44100.0
+        [settings setValue :[NSNumber numberWithInt:2] forKey: AVNumberOfChannelsKey];
+        [settings setValue :[NSNumber numberWithInt:16] forKey: AVLinearPCMBitDepthKey];
+        [settings setValue:[NSNumber numberWithInt:AVAudioQualityMin] forKey:AVEncoderAudioQualityKey];
+        // chenEdit end
         
         _recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL fileURLWithPath:filePath] settings:0 error:nil];
+        // chenEdit 添加
+        _recorder.meteringEnabled = YES;
+        // chenEdit end
         [_recorder prepareToRecord];
     }
     
